@@ -21,7 +21,8 @@ public class GestioneSocketClient {
         try {
             // TODO code application logic here
             Client client = new Client(2000, InetAddress.getLocalHost());
-            client.scrivi("Richiesta di connessione");
+            client.scrivi("data");
+            client.riceviDataCorrente();
             System.out.println(client.leggi());
         } catch (UnknownHostException ex) {
             System.err.print(ex);

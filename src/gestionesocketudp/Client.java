@@ -24,6 +24,7 @@ public class Client {
     byte[] buffer;
     String messaggioDaInviare;
     String messaggioRicevuto;
+    String dataCorrente;
     
     public Client(int port, InetAddress IP){
         try {
@@ -58,4 +59,19 @@ public class Client {
         }
     }
     
+    public void riceviDataCorrente(){
+        try {
+            buffer = new byte[256];
+            inPacket = new DatagramPacket(buffer, buffer.length);
+            dataSocket.receive(inPacket);
+            dataCorrente = new String(inPacket.getData(), 0, inPacket.getLength());
+            System.out.println("Data del server ricevuta: "+dataCorrente);
+        } catch (IOException ex) {
+            System.err.print(ex);
+        }
+    }
+    
+    public void chiudi(){
+        dataSocket.close();
+    }
 }

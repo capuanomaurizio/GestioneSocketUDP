@@ -11,8 +11,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  *
@@ -54,7 +53,17 @@ public class Server {
         }
     }
     
-    public void leggi(){
+    public void inviaDataCorrente(){
+        try {
+            Date d = new Date();
+            outPacket = new DatagramPacket(d.toString().getBytes(), d.toString().length(), lastClientIP, lastClientPort);
+            dataSocket.send(outPacket);
+        } catch (IOException ex) {
+            System.err.print(ex);
+        }
+    }
+    
+    public String leggi(){
         try {
             buffer = new byte[256];
             inPacket = new DatagramPacket(buffer, buffer.length);
@@ -63,8 +72,14 @@ public class Server {
             lastClientIP = inPacket.getAddress();
             lastClientPort = inPacket.getPort();
             System.out.println("IL CLIENT " + lastClientIP + ":" + lastClientPort + " dice: " + messaggioRicevuto);
+            return messaggioRicevuto;
         } catch (IOException ex) {
             System.err.print(ex);
+            return null;
         }
+    }
+    
+    public void chiudi(){
+        dataSocket.close();
     }
 }

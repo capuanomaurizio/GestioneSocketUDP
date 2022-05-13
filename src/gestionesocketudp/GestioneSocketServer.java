@@ -5,8 +5,6 @@
  */
 package gestionesocketudp;
 
-import java.net.InetAddress;
-
 /**
  *
  * @author mauri
@@ -20,7 +18,8 @@ public class GestioneSocketServer {
         // TODO code application logic here
         Server server = new Server(2000);
         while(true){
-            server.leggi();
+            if(server.leggi().equals("data"))
+                server.inviaDataCorrente();
             server.scrivi("Benvenuto nuovo client");
         }
         
