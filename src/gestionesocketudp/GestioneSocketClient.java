@@ -24,6 +24,7 @@ public class GestioneSocketClient {
             client.scrivi("data");
             client.riceviDataCorrente();
             System.out.println(client.leggi());
+            client.chiudi();
         } catch (UnknownHostException ex) {
             System.err.print(ex);
         }

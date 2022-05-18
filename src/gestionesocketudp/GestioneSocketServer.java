@@ -22,7 +22,6 @@ public class GestioneSocketServer {
                 server.inviaDataCorrente();
             server.scrivi("Benvenuto nuovo client");
         }
-        
     }
     
 }
